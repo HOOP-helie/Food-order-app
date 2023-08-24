@@ -1,23 +1,21 @@
 import React from 'react'
 import styles from "./Cart.module.css"
-import { createPortal } from 'react-dom'
+import Modal from '../UI/Modal'
 
-const Cart = () => {
+const Cart = (props) => {
     return (
-        <>
-            {
-                createPortal(
-                    <div>
-                        <div className={styles.total}>
-                            <span>Total Amount</span>
-                            <span>30</span>
-                        </div>
-                        <div className={styles.actions}>
-                            <button className={styles['button--alt']}>Close</button>
-                            <button className={styles.button}>Order</button>
-                        </div>
-                    </div >
-                    , document.getElementById('cartModal'))}</>
+        <Modal hideModal={props.hideModal}>
+            <div>
+                <div className={styles.total}>
+                    <span>Total Amount</span>
+                    <span>30</span>
+                </div>
+                <div className={styles.actions}>
+                    <button onClick={props.hideModal} className={styles['button--alt']}>Close</button>
+                    <button className={styles.button}>Order</button>
+                </div>
+            </div >
+        </Modal>
     )
 }
 
