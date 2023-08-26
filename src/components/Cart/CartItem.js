@@ -1,7 +1,9 @@
+import { useContext } from 'react'
 import styles from './CartItem.module.css';
-
+import { CartContext } from '../../store/cart-context'
 const CartItem = (props) => {
     const price = `$${+props.price.toFixed(2)}`;
+    const ctx = useContext(CartContext);
 
     return (
         <li className={styles['cart-item']}>
@@ -13,8 +15,8 @@ const CartItem = (props) => {
                 </div>
             </div>
             <div className={styles.actions}>
-                <button onClick={props.onRemove}>−</button>
-                <button onClick={props.onAdd}>+</button>
+                <button onClick={() => ctx.removeId(props.id)}>−</button>
+                <button >+</button>
             </div>
         </li>
     );

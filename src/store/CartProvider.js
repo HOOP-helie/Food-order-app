@@ -30,6 +30,26 @@ const cartReducer = (state, action) => {
             totalPrice: +updatedTotalPrice
         }
     }
+
+    if (action.type === "REMOVE") {
+        let updatedItems = [...state.items];
+
+        const itemIndex = state.items.findIndex((item) => item.id === action.id);
+        const updatedItem = state.items[itemIndex];
+
+        updatedItem.amount = --updatedItem.amount;
+        updatedItems[itemIndex] = updatedItem;
+
+        const updatedTotalPrice = state.totalPrice - updatedItem.price;
+
+        if (updatedItem.amount === 0) updatedItems.splice(itemIndex, 1)
+
+        return {
+            items: updatedItems,
+            totalPrice: Math.abs(+updatedTotalPrice)
+        }
+    }
+
     return defaultCartState
 }
 
@@ -48,7 +68,7 @@ const CartProvider = (props) => {
         items: cartState.items,
         totalPrice: cartState.totalPrice,
         addItem: (item) => { addItemToCart(item) },
-        removeId: (id) => { }
+        removeId: (id) => { removeItemFromCart(id) }
     }
 
     return (
