@@ -3,7 +3,7 @@ import styles from "./MealItemForm.module.css"
 import { CartContext } from './../../../store/cart-context'
 
 const MealItemForm = (props) => {
-    const [enteredAmount, setEnteredAmount] = useState(0);
+    const [enteredAmount, setEnteredAmount] = useState("0");
     const [amountIsValid, setAmountIsValid] = useState(true);
     const ctx = useContext(CartContext);
 
@@ -13,14 +13,18 @@ const MealItemForm = (props) => {
         if (enteredAmount.trim().length === 0 || +enteredAmount < 1 || +enteredAmount > 5) {
             setAmountIsValid(false)
             return
+        } else {
+            setAmountIsValid(true)
+
+            ctx.addItem({
+                id: props.inputId,
+                name: props.name,
+                amount: +enteredAmount,
+                price: props.price
+            })
         }
 
-        ctx.addItem({
-            id: props.inputId,
-            name: props.name,
-            amount: +enteredAmount,
-            price: props.price
-        })
+
     }
 
     return (
