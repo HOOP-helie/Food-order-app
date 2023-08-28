@@ -16,9 +16,9 @@ const CartItem = (props) => {
             </div>
             <div className={styles.actions}>
                 <button onClick={() => ctx.removeId(props.id)}>−</button>
-                <button >+</button>
+                <button onClick={() => ctx.addItem({ ...props, amount: 1 })} >+</button>
             </div>
-        </li>
+        </li >
     );
 };
 

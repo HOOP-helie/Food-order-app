@@ -15,13 +15,13 @@ const MealItemForm = (props) => {
             return
         } else {
             setAmountIsValid(true)
-
             ctx.addItem({
                 id: props.inputId,
                 name: props.name,
                 amount: +enteredAmount,
                 price: props.price
             })
+            setEnteredAmount("0")
         }
 
 
